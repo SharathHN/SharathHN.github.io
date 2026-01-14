@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharath H N</title>
+
+  <style>
+    :root {
+      --text-primary: #2c2c2c;
+      --text-secondary: #666;
+      --accent: #0066cc;
+      --bg: #fafafa;
+      --border: #e0e0e0;
+      --nav-width: 180px;
+    }
+
+    [data-theme="dark"] {
+      --text-primary: #e6e6e6;
+      --text-secondary: #aaa;
+      --accent: #66b3ff;
+      --bg: #1a1a1a;
+      --border: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      font-size: 18px;       /* BIGGER BASE SCALE */
+      line-height: 1.7;
+    }
+
+    /* ---------- NAV ---------- */
+    nav {
+      position: fixed;
+      width: var(--nav-width);
+      height: 100vh;
+      padding: 60px 0 60px 30px;
+    }
+
+    nav ul {
+      list-style: none;
+    }
+
+    nav li {
+      margin-bottom: 14px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .theme-toggle {
+      margin-top: 40px;
+      background: none;
+      border: none;
+      font-size: 14px;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .theme-toggle:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    /* ---------- MAIN ---------- */
+    main {
+      margin-left: calc(var(--nav-width) + 60px);
+      padding: 60px 60px 60px 0;
+      max-width: 1300px;     /* PAGE IS WIDER */
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+      margin-bottom: 60px;
+      overflow: auto;
+    }
+
+    .photo {
+  float: right;
+  max-width: 250px;     /* make it bigger */
+  height: auto;         /* preserve aspect ratio */
+  margin-left: 40px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+
+    h1 {
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-top: 10px;
+    }
+
+    .links {
+      margin-top: 14px;
+      font-size: 16px;
+    }
+
+    .links a {
+      margin-right: 16px;
+      color: var(--accent);
+    }
+
+    /* ---------- SECTIONS ---------- */
+    section {
+      margin-bottom: 70px;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+
+    p {
+      margin-bottom: 14px;
+    }
+
+    /* ---------- NEWS ---------- */
+    .news-list li {
+      margin-bottom: 12px;
+    }
+
+    .news-date {
+      color: var(--text-secondary);
+      margin-right: 10px;
+    }
+
+    /* ---------- PUBLICATIONS ---------- */
+    .pub-card {
+      display: flex;
+      gap: 40px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 30px;
+    }
+
+    .pub-image img {
+      width: 320px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: white;
+    }
+
+    .pub-title {
+      font-size: 19px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .pub-authors,
+    .pub-venue {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .pub-venue {
+      font-style: italic;
+      margin-bottom: 14px;
+    }
+
+    .pub-links a {
+      display: inline-block;
+      font-size: 15px;
+      padding: 8px 18px;
+      margin-right: 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .pub-links a.primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      margin-top: 80px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 900px) {
+      nav {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 20px;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      main {
+        margin-left: 0;
+        padding: 40px 24px;
+        max-width: 100%;
+      }
+
+      .photo {
+        float: none;
+        margin: 0 0 24px 0;
+      }
+    }
+    .news-timeline {
+  list-style: none;
+}
+
+.news-timeline li {
+  display: grid;
+  grid-template-columns: 110px 1fr; /* was too small */
+  column-gap: 16px;
+  margin-bottom: 14px;
+}
+
+.news-year {
+  white-space: nowrap;  /* CRITICAL */
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+
+]
+.news-text {
+  font-size: 16px;
+}
+.project {
+  margin-bottom: 32px;
+}
+
+.project-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.project-meta {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.project-desc {
+  margin-bottom: 8px;
+}
+
+.project-links a {
+  margin-right: 12px;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#about">about</a></li>
+    <li><a href="#research">research</a></li>
+    <li><a href="#news">news</a></li>
+    <li><a href="#publications">publications</a></li>
+   <!-- <li><a href="#projects">projects</a></li>-->
+    <li><a href="#contact">contact</a></li>
+  </ul>
+
+  <button id="theme-toggle" class="theme-toggle">dark mode</button>
+</nav>
+
+<main>
+
+  <header>
+   <img src="profile.jpeg" alt="Profile photo" class="photo">
+
+
+    <h1>Sharath Naganna Honnavalli (Sharath H N)</h1>
+    <p class="subtitle">
+      MS (Research), Computer Science & Engineering · IIT Bombay<br>
+      Natural Language Processing · Figurative Language · Vision-Language Models
+    </p>
+
+    <div class="links">
+      <a href="mailto:sharathhn@cse.iitb.ac.in">Email</a>
+      <a href="https://scholar.google.com/citations?user=hTQEZd4AAAAJ&hl=en">Google Scholar</a>
+      <a href="https://github.com/SharathHN">GitHub</a>
+      <a href="resume.pdf">CV</a>
+      <a href="https://www.linkedin.com/in/sharath-h-n/">LinkedIn</a>
+    </div>
+  </header>
+
+<section id="about">
+  <h2>About</h2>
+
+  <p>
+    I am a Master’s (Research) student in Computer Science and Engineering at the
+    Indian Institute of Technology Bombay. My research interests are centered on
+    natural language processing and computational linguistics, with a focus on
+    non-literal and pragmatic language phenomena.
+  </p>
+
+  <p>
+    Previously, I worked as a Software Engineer at Cisco, where I developed
+    backend systems primarily in Go.
+  </p>
+
+  <p>
+    Outside academia, I am a long-time <em>One Piece</em> fan, patiently waiting
+    for Eiichiro Oda to complete the manga.
+  </p>
+</section>
+
+
+<section id="research">
+  <h2>Research</h2>
+
+  <p>
+    My research focuses on modeling and analyzing non-literal language phenomena
+    in natural language processing. I study how figurative meaning, such as
+    humor, sarcasm, and humblebragging, is expressed in text and how neural
+    language models interpret and generate such content.
+  </p>
+
+  <p>
+    A central direction of my work is the steering and control of figurative
+    language in neural models. I investigate prompt-based and inference-time
+    interventions for influencing figurative behavior, and use mechanistic
+    interpretability tools to analyze and characterize model responses across
+    different figurative contexts.
+  </p>
+
+  <p>
+    I also work on multimodal retrieval-augmented generation for document
+    understanding, focusing on systems that retrieve and reason over both
+    textual and visual information, with an emphasis on robustness to complex
+    layouts and real-world document structure.
+  </p>
+
+  <p>
+    As a potential research direction, I am interested in exploring the
+    intersection of mechanistic interpretability and abstract, high-level
+    language concepts that are difficult to formalize, such as cultural context
+    and socially grounded meaning. I aim to investigate whether interpretability
+    tools can help characterize how such concepts influence model behavior,
+    without assuming explicit symbolic representations.
+  </p>
+</section>
+
+
+  <section id="news">
+  <h2>News</h2>
+  <ul class="news-timeline">
+    <li>
+      <span class="news-year">Aug 2025</span>
+      <span class="news-text">
+        Paper accepted at <em>ACL 2025 (Findings)</em>.
+      </span>
+    </li>
+
+    <li>
+      <span class="news-year">May 2025</span>
+      <span class="news-text">
+        Working as an Applied ML Intern at
+        <a href="https://www.hyperbots.com/" target="_blank" rel="noopener noreferrer">
+          Hyperbots Inc.
+        </a>
+      </span>
+    </li>
+
+    <li>
+      <span class="news-year">July 2024</span>
+      <span class="news-text">
+        Started MS (Research) at the Indian Institute of Technology Bombay,
+        advised by Prof. Pushpak Bhattacharyya.
+      </span>
+    </li>
+
+    <li>
+      <span class="news-year">Aug 2022</span>
+      <span class="news-text">
+        Joined Cisco as a Software Engineer.
+      </span>
+    </li>
+  </ul>
+</section>
+
+
+  <section id="publications">
+    <h2>Publications</h2>
+
+    <div class="pub-card">
+
+      <div>
+        <div class="pub-title">“My life is miserable, have to sign 500 autographs everyday”: Exposing Humblebragging, the Brags in Disguise</div>
+        <div class="pub-authors"><b>Sharath Naganna</b>, Saprativa Bhattacharjee, Biplab Banerjee, Pushpak Bhattacharyya</div>
+        <div class="pub-venue">ACL 2025 (Findings), Vienna, Austria</div>
+        <div class="pub-links">
+          <a class="primary" href="https://aclanthology.org/2025.findings-acl.198/">Paper</a>
+          <a href="https://github.com/SharathHN/HB-24">Code</a>
+        </div>
+      </div>
+    </div>
+     <div class="pub-card">
+
+      <div>
+        <div class="pub-title">Impact of Different Embeddings on Text Classification</div>
+        <div class="pub-authors">K. M. Anil Kumar, S G Anusha, <b>H N Sharath</b>, M Milind, Manju Charan</div>
+        <div class="pub-venue">ICRASET 2024, Mandya, India</div>
+        <div class="pub-links">
+          <a class="primary" href="https://ieeexplore.ieee.org/document/10895636">Paper</a>
+          <a href="https://github.com/SharathHN/fyp-notebooks">Code</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!--
+  <section id="projects">
+  <h2>Projects</h2>
+
+  <div class="project">
+    <div class="project-title">Humblebrag Detection (HB-24)</div>
+    <div class="project-meta">NLP · Dataset · 2025</div>
+    <p class="project-desc">
+      Introduced the first NLP benchmark for humblebrag detection, along with a
+      4-tuple formulation and dataset of 3,340 instances.
+    </p>
+    <div class="project-links">
+      <a href="#">Paper</a>
+      <a href="#">Code</a>
+      <a href="#">Dataset</a>
+    </div>
+  </div>
+
+</section>
+-->
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: sharathhn@cse.iitb.ac.in</p>
+    <p>Mumbai, India</p>
+  </section>
+
+  <footer>
+    Last updated — 2026
+  </footer>
+
+</main>
+
+<script>
+  const toggle = document.getElementById("theme-toggle");
+  const root = document.documentElement;
+  const saved = localStorage.getItem("theme");
+
+  if (saved) root.setAttribute("data-theme", saved);
+
+  toggle.onclick = () => {
+    const theme = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    toggle.textContent = theme === "dark" ? "light mode" : "dark mode";
+  };
+</script>
+
+</body>
+</html>
+
