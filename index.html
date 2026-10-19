@@ -1,527 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sharath H N</title>
+  <meta name="description" content="Sharath Naganna Honnavalli — MS (Research) student at IIT Bombay working on NLP, figurative language, interpretability and vision-language models.">
+  <meta property="og:title" content="Sharath H N">
+  <meta property="og:description" content="MS (Research), CSE · IIT Bombay — NLP, figurative language, interpretability.">
+  <meta property="og:image" content="headshot.jpg">
+  <link rel="icon" href="headshot.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+
+  <script>
+    // Apply saved theme before paint to avoid a flash.
+    try {
+      const t = localStorage.getItem("theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
 
   <style>
     :root {
-      --text-primary: #2c2c2c;
-      --text-secondary: #666;
-      --accent: #0066cc;
-      --bg: #fafafa;
-      --border: #e0e0e0;
-      --nav-width: 180px;
+      --bg: #fdfdfc;
+      --surface: #f4f4f1;
+      --text: #1d1d1f;
+      --muted: #6b6b70;
+      --border: #e6e5e0;
+      --accent: #1f5fbf;
+      --accent-soft: #e8effa;
+      --mark: #b4530a;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #131416;
+        --surface: #1c1d20;
+        --text: #e9e9eb;
+        --muted: #9a9aa1;
+        --border: #2c2d31;
+        --accent: #7fb0ff;
+        --accent-soft: #1d2a40;
+        --mark: #f0a35e;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #131416;
+      --surface: #1c1d20;
+      --text: #e9e9eb;
+      --muted: #9a9aa1;
+      --border: #2c2d31;
+      --accent: #7fb0ff;
+      --accent-soft: #1d2a40;
+      --mark: #f0a35e;
     }
 
-    [data-theme="dark"] {
-      --text-primary: #e6e6e6;
-      --text-secondary: #aaa;
-      --accent: #66b3ff;
-      --bg: #1a1a1a;
-      --border: #333;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html { scroll-behavior: smooth; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 
     body {
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
-      color: var(--text-primary);
-      font-size: 18px;       /* BIGGER BASE SCALE */
-      line-height: 1.7;
+      color: var(--text);
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 16.5px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ---------- NAV ---------- */
-    nav {
-      position: fixed;
-      width: var(--nav-width);
-      height: 100vh;
-      padding: 60px 0 60px 30px;
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- Top bar ---------- */
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar .wrap {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; gap: 16px;
+    }
+    .brand { font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+    .brand:hover { text-decoration: none; }
+    .topbar nav { display: flex; align-items: center; gap: 22px; }
+    .topbar nav a { color: var(--muted); font-size: 14.5px; }
+    .topbar nav a:hover { color: var(--text); text-decoration: none; }
+
+    .theme-btn {
+      display: grid; place-items: center;
+      width: 32px; height: 32px;
+      border: 1px solid var(--border); border-radius: 8px;
+      background: transparent; color: var(--muted); cursor: pointer;
+    }
+    .theme-btn:hover { color: var(--text); }
+    .theme-btn svg { width: 16px; height: 16px; }
+    .icon-sun { display: none; }
+    :root[data-theme="dark"] .icon-sun { display: block; }
+    :root[data-theme="dark"] .icon-moon { display: none; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .icon-sun { display: block; }
+      :root:not([data-theme="light"]) .icon-moon { display: none; }
     }
 
-    nav ul {
-      list-style: none;
+    /* ---------- Hero ---------- */
+    .hero {
+      display: grid; grid-template-columns: 148px 1fr; gap: 32px;
+      align-items: center;
+      padding: 64px 0 48px;
     }
-
-    nav li {
-      margin-bottom: 14px;
+    .hero img {
+      width: 148px; height: 148px; border-radius: 50%;
+      object-fit: cover; border: 1px solid var(--border);
     }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text-secondary);
-      font-size: 15px;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    .theme-toggle {
-      margin-top: 40px;
-      background: none;
-      border: none;
-      font-size: 14px;
-      color: var(--text-secondary);
-      cursor: pointer;
-    }
-
-    .theme-toggle:hover {
-      color: var(--accent);
-      text-decoration: underline;
-    }
-
-    /* ---------- MAIN ---------- */
-    main {
-      margin-left: calc(var(--nav-width) + 60px);
-      padding: 60px 60px 60px 0;
-      max-width: 1300px;     /* PAGE IS WIDER */
-    }
-
-    /* ---------- HEADER ---------- */
-    header {
-      margin-bottom: 60px;
-      overflow: auto;
-    }
-
-    .photo {
-  float: right;
-  max-width: 250px;     /* make it bigger */
-  height: auto;         /* preserve aspect ratio */
-  margin-left: 40px;
-  margin-bottom: 10px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-}
-
-
     h1 {
-      font-size: 30px;
-      font-weight: 600;
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 34px; font-weight: 600; line-height: 1.2;
+      letter-spacing: -0.01em;
     }
+    .fullname { color: var(--muted); font-size: 14.5px; margin-top: 4px; }
+    .role { margin-top: 10px; }
+    .role span { color: var(--muted); }
 
-    .subtitle {
-      font-size: 17px;
-      color: var(--text-secondary);
-      margin-top: 10px;
-    }
-
-    .links {
-      margin-top: 14px;
-      font-size: 16px;
-    }
-
+    .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
     .links a {
-      margin-right: 16px;
-      color: var(--accent);
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 14px; font-weight: 500; color: var(--text);
+      padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px;
+      background: var(--surface);
     }
+    .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .links svg { width: 15px; height: 15px; }
 
-    /* ---------- SECTIONS ---------- */
-    section {
-      margin-bottom: 70px;
-    }
-
+    /* ---------- Sections ---------- */
+    section { padding: 36px 0; border-top: 1px solid var(--border); }
     h2 {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 8px;
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--muted);
+      margin-bottom: 20px;
+    }
+    p + p { margin-top: 14px; }
+
+    .interests {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;
+    }
+    .interests li {
+      list-style: none; font-size: 13.5px;
+      padding: 4px 10px; border-radius: 6px;
+      background: var(--accent-soft); color: var(--accent);
     }
 
-    p {
-      margin-bottom: 14px;
+    /* ---------- News ---------- */
+    .news { list-style: none; }
+    .news li {
+      display: grid; grid-template-columns: 96px 1fr; gap: 16px;
+      padding: 6px 0;
+    }
+    .news time {
+      color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums;
+      padding-top: 1px;
     }
 
-    /* ---------- NEWS ---------- */
-    .news-list li {
-      margin-bottom: 12px;
+    /* ---------- Publications ---------- */
+    .pubs { list-style: none; display: grid; gap: 28px; }
+    .pub-title { font-weight: 600; line-height: 1.4; }
+    .pub-authors { color: var(--muted); font-size: 15px; margin-top: 4px; }
+    .pub-authors .me { color: var(--text); font-weight: 600; }
+    .pub-meta {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+      margin-top: 8px; font-size: 14px;
+    }
+    .venue {
+      font-size: 12.5px; font-weight: 600;
+      padding: 2px 8px; border-radius: 5px;
+      border: 1px solid var(--border); color: var(--text); background: var(--surface);
+    }
+    .venue.review { color: var(--mark); }
+    .pub-meta a { font-weight: 500; }
+
+    /* ---------- Experience ---------- */
+    .exp { list-style: none; display: grid; gap: 18px; }
+    .exp li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; }
+    .exp .org { font-weight: 600; }
+    .exp .what { color: var(--muted); font-size: 15px; grid-column: 1; }
+    .exp time {
+      color: var(--muted); font-size: 14px; text-align: right;
+      font-variant-numeric: tabular-nums; grid-column: 2; grid-row: 1;
     }
 
-    .news-date {
-      color: var(--text-secondary);
-      margin-right: 10px;
-    }
-
-    /* ---------- PUBLICATIONS ---------- */
-    .pub-card {
-      display: flex;
-      gap: 40px;
-      padding-bottom: 30px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 30px;
-    }
-
-    .pub-image img {
-      width: 320px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: white;
-    }
-
-    .pub-title {
-      font-size: 19px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .pub-authors,
-    .pub-venue {
-      font-size: 16px;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-
-    .pub-venue {
-      font-style: italic;
-      margin-bottom: 14px;
-    }
-
-    .pub-links a {
-      display: inline-block;
-      font-size: 15px;
-      padding: 8px 18px;
-      margin-right: 14px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      text-decoration: none;
-      color: var(--text-primary);
-    }
-
-    .pub-links a.primary {
-      background: var(--accent);
-      color: white;
-      border-color: var(--accent);
-    }
-
-    /* ---------- FOOTER ---------- */
+    /* ---------- Footer ---------- */
     footer {
-      margin-top: 80px;
-      padding-top: 20px;
       border-top: 1px solid var(--border);
-      font-size: 14px;
-      color: var(--text-secondary);
+      padding: 28px 0 48px; font-size: 14px; color: var(--muted);
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
     }
 
-    /* ---------- MOBILE ---------- */
-    @media (max-width: 900px) {
-      nav {
-        position: relative;
-        width: 100%;
-        height: auto;
-        padding: 20px;
-      }
-
-      nav ul {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-      }
-
-      main {
-        margin-left: 0;
-        padding: 40px 24px;
-        max-width: 100%;
-      }
-
-      .photo {
-        float: none;
-        margin: 0 0 24px 0;
-      }
+    /* ---------- Mobile ---------- */
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .wrap { padding: 0 16px; }
+      .topbar nav { gap: 14px; }
+      .topbar nav a.hide-sm { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 20px; padding: 40px 0 32px; }
+      .hero img { width: 112px; height: 112px; }
+      h1 { font-size: 28px; }
+      .news li { grid-template-columns: 1fr; gap: 0; padding: 8px 0; }
+      .exp li { grid-template-columns: 1fr; }
+      .exp time { grid-column: 1; grid-row: auto; text-align: left; }
     }
-    .news-timeline {
-  list-style: none;
-}
-
-.news-timeline li {
-  display: grid;
-  grid-template-columns: 110px 1fr; /* was too small */
-  column-gap: 16px;
-  margin-bottom: 14px;
-}
-
-.news-year {
-  white-space: nowrap;  /* CRITICAL */
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-
-]
-.news-text {
-  font-size: 16px;
-}
-.project {
-  margin-bottom: 32px;
-}
-
-.project-title {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.project-meta {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 6px;
-}
-
-.project-desc {
-  margin-bottom: 8px;
-}
-
-.project-links a {
-  margin-right: 12px;
-  font-size: 14px;
-  color: var(--accent);
-}
-
   </style>
 </head>
 
 <body>
 
-<nav>
-  <ul>
-    <li><a href="#about">about</a></li>
-    <li><a href="#research">research</a></li>
-    <li><a href="#news">news</a></li>
-    <li><a href="#publications">publications</a></li>
-   <!-- <li><a href="#projects">projects</a></li>-->
-    <li><a href="#contact">contact</a></li>
-  </ul>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#">Sharath H N</a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#news" class="hide-sm">News</a>
+      <a href="#publications">Papers</a>
+      <a href="#experience" class="hide-sm">Experience</a>
+      <button class="theme-btn" id="theme-btn" aria-label="Toggle dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
 
-  <button id="theme-toggle" class="theme-toggle">dark mode</button>
-</nav>
+<main class="wrap">
 
-<main>
-
-  <header>
-   <img src="profile.jpeg" alt="Profile photo" class="photo">
-
-
-    <h1>Sharath Naganna Honnavalli (Sharath H N)</h1>
-    <p class="subtitle">
-      MS (Research), Computer Science & Engineering · IIT Bombay<br>
-      Natural Language Processing · Figurative Language · Vision-Language Models
-    </p>
-
-    <div class="links">
-      <a href="mailto:sharathhn@cse.iitb.ac.in">Email</a>
-      <a href="https://scholar.google.com/citations?user=hTQEZd4AAAAJ&hl=en">Google Scholar</a>
-      <a href="https://github.com/SharathHN">GitHub</a>
-      <a href="resume.pdf">CV</a>
-      <a href="https://www.linkedin.com/in/sharath-h-n/">LinkedIn</a>
+  <div class="hero">
+    <img src="headshot.jpg" alt="Sharath H N" width="148" height="148">
+    <div>
+      <h1>Sharath H N</h1>
+      <div class="fullname">Sharath Naganna Honnavalli</div>
+      <p class="role">MS (Research), Computer Science &amp; Engineering<br><span>Indian Institute of Technology Bombay</span></p>
+      <div class="links">
+        <a href="mailto:sharathhn@cse.iitb.ac.in">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Email</a>
+        <a href="https://scholar.google.com/citations?user=hTQEZd4AAAAJ&amp;hl=en" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 4 2 10l10 6 10-6z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>Scholar</a>
+        <a href="https://github.com/SharathHN" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>GitHub</a>
+        <a href="https://www.linkedin.com/in/sharath-h-n/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z"/></svg>LinkedIn</a>
+        <a href="resume.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 13h6M9 17h6"/></svg>CV</a>
+      </div>
     </div>
-  </header>
+  </div>
 
-<section id="about">
-  <h2>About</h2>
-
-  <p>
-    I am a Master’s (Research) student in Computer Science and Engineering at the
-    Indian Institute of Technology Bombay. My research interests are centered on
-    natural language processing and computational linguistics, with a focus on
-    non-literal and pragmatic language phenomena.
-  </p>
-
-  <p>
-    Previously, I worked as a Software Engineer at Cisco, where I developed
-    backend systems primarily in Go.
-  </p>
-
-  <p>
-    Outside academia, I am a long-time <em>One Piece</em> fan, patiently waiting
-    for Eiichiro Oda to complete the manga.
-  </p>
-</section>
-
-
-<section id="research">
-  <h2>Research</h2>
-
-  <p>
-    My research focuses on modeling and analyzing non-literal language phenomena
-    in natural language processing. I study how figurative meaning, such as
-    humor, sarcasm, and humblebragging, is expressed in text and how neural
-    language models interpret and generate such content.
-  </p>
-
-  <p>
-    A central direction of my work is the steering and control of figurative
-    language in neural models. I investigate prompt-based and inference-time
-    interventions for influencing figurative behavior, and use mechanistic
-    interpretability tools to analyze and characterize model responses across
-    different figurative contexts.
-  </p>
-
-  <p>
-    I also work on multimodal retrieval-augmented generation for document
-    understanding, focusing on systems that retrieve and reason over both
-    textual and visual information, with an emphasis on robustness to complex
-    layouts and real-world document structure.
-  </p>
-
-  <p>
-    As a potential research direction, I am interested in exploring the
-    intersection of mechanistic interpretability and abstract, high-level
-    language concepts that are difficult to formalize, such as cultural context
-    and socially grounded meaning. I aim to investigate whether interpretability
-    tools can help characterize how such concepts influence model behavior,
-    without assuming explicit symbolic representations.
-  </p>
-</section>
-
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      I am a Master’s (Research) student in Computer Science and Engineering at
+      IIT Bombay, advised by
+      <a href="https://www.cse.iitb.ac.in/~pb/" target="_blank" rel="noopener">Prof. Pushpak Bhattacharyya</a>.
+      I work on natural language processing, with a focus on non-literal and
+      pragmatic language — how figurative meaning such as humor, sarcasm and
+      humblebragging is expressed in text, and how language models interpret and
+      generate it.
+    </p>
+    <p>
+      A central thread of my work is steering and controlling figurative language
+      in neural models: prompt-based and inference-time interventions, analysed
+      with mechanistic interpretability tools. I also work on multimodal
+      retrieval-augmented generation for document understanding, with an emphasis
+      on robustness to complex, real-world layouts. Going forward, I’m interested
+      in whether interpretability can characterise abstract, hard-to-formalise
+      concepts such as cultural context and socially grounded meaning.
+    </p>
+    <p>
+      Before IIT Bombay, I was a Software Engineer at Cisco, building backend
+      systems in Go. Outside research, I’m a long-time <em>One Piece</em> fan,
+      patiently waiting for Oda to finish the manga.
+    </p>
+    <ul class="interests">
+      <li>Figurative language</li>
+      <li>Mechanistic interpretability</li>
+      <li>Model steering</li>
+      <li>Vision-language models</li>
+      <li>Multimodal RAG</li>
+    </ul>
+  </section>
 
   <section id="news">
-  <h2>News</h2>
-  <ul class="news-timeline">
-    <li>
-      <span class="news-year">March 2026</span>
-      <span class="news-text">
-        Paper accepted at <em>VisionDocs Workshop (WACV 2026)</em>.
-      </span>
-    </li>
-    <li>
-      <span class="news-year">Aug 2025</span>
-      <span class="news-text">
-        Paper accepted at <em>ACL 2025 (Findings)</em>.
-      </span>
-    </li>
-
-    <li>
-      <span class="news-year">May 2025</span>
-      <span class="news-text">
-        Working as an Applied ML Intern at
-        <a href="https://www.hyperbots.com/" target="_blank" rel="noopener noreferrer">
-          Hyperbots Inc.
-        </a>
-      </span>
-    </li>
-
-    <li>
-      <span class="news-year">July 2024</span>
-      <span class="news-text">
-        Started MS (Research) at the Indian Institute of Technology Bombay,
-        advised by Prof. Pushpak Bhattacharyya.
-      </span>
-    </li>
-
-    <li>
-      <span class="news-year">Aug 2022</span>
-      <span class="news-text">
-        Joined Cisco as a Software Engineer.
-      </span>
-    </li>
-  </ul>
-</section>
-
+    <h2>News</h2>
+    <ul class="news">
+      <li><time>Mar 2026</time><span>Paper accepted at the <em>VisionDocs Workshop, WACV 2026</em>.</span></li>
+      <li><time>Aug 2025</time><span>Paper accepted at <em>ACL 2025 (Findings)</em>.</span></li>
+      <li><time>May 2025</time><span>Joined <a href="https://www.hyperbots.com/" target="_blank" rel="noopener">Hyperbots Inc.</a> as an Applied ML Intern.</span></li>
+      <li><time>Jul 2024</time><span>Started MS (Research) at IIT Bombay.</span></li>
+      <li><time>Aug 2022</time><span>Joined Cisco as a Software Engineer.</span></li>
+    </ul>
+  </section>
 
   <section id="publications">
     <h2>Publications</h2>
-    <div class="pub-card">
-
-      <div>
-  <div class="pub-title">Are Arithmetic Heuristic Neurons Form-Invariant? A Mechanistic Analysis of Symbols, Text, and Code in LLMs</div>
-  <div class="pub-authors"><b>Sharath Naganna</b>, Tanvir Ahmed Sijan,Uddipta Kalita</div>
-  <div class="pub-venue">Under review</div>
-  <div class="pub-links">
-    <a class="primary"https://arxiv.org/pdf/2607.16693">Paper</a>
-    <a class="primary"https://github.com/SharathHN/format-invariant-arithmetic>Code</a>
-  </div>
-</div>
-
-    <div class="pub-card">
-
-      <div>
-  <div class="pub-title">SAVIOR: Sample-efficient Adaptation of Vision-Language Models for OCR Representation</div>
-  <div class="pub-authors">Akshata A. Bhat, <b>Sharath Naganna</b>, Saiful Haq, Prashant Khatri, Krishna Chaitanya Reddy Tamataam, Neha Arun, Niyati Chhaya, Pushpak Bhattacharya</div>
-  <div class="pub-venue">WACV Workshops 2026, Tucson, USA</div>
-  <div class="pub-links">
-    <a class="primary" https://openaccess.thecvf.com/content/WACV2026W/VisionDocs/papers/Bhat_SAVIOR_Sample-efficient_Adaptation_of_Vision-Language_Models_for_OCR_Representation_WACVW_2026_paper.pdf/">Paper</a>
-  </div>
-</div>
-
-      <div>
+    <ol class="pubs">
+      <li>
+        <div class="pub-title">Are Arithmetic Heuristic Neurons Form-Invariant? A Mechanistic Analysis of Symbols, Text, and Code in LLMs</div>
+        <div class="pub-authors"><span class="me">Sharath Naganna</span>, Tanvir Ahmed Sijan, Uddipta Kalita</div>
+        <div class="pub-meta">
+          <span class="venue review">Under review</span>
+          <a href="https://arxiv.org/pdf/2607.16693" target="_blank" rel="noopener">Paper</a>
+          <a href="https://github.com/SharathHN/format-invariant-arithmetic" target="_blank" rel="noopener">Code</a>
+        </div>
+      </li>
+      <li>
+        <div class="pub-title">SAVIOR: Sample-efficient Adaptation of Vision-Language Models for OCR Representation</div>
+        <div class="pub-authors">Akshata A. Bhat, <span class="me">Sharath Naganna</span>, Saiful Haq, Prashant Khatri, Krishna Chaitanya Reddy Tamataam, Neha Arun, Niyati Chhaya, Pushpak Bhattacharyya</div>
+        <div class="pub-meta">
+          <span class="venue">WACV 2026 Workshops</span>
+          <a href="https://openaccess.thecvf.com/content/WACV2026W/VisionDocs/papers/Bhat_SAVIOR_Sample-efficient_Adaptation_of_Vision-Language_Models_for_OCR_Representation_WACVW_2026_paper.pdf" target="_blank" rel="noopener">Paper</a>
+        </div>
+      </li>
+      <li>
         <div class="pub-title">“My life is miserable, have to sign 500 autographs everyday”: Exposing Humblebragging, the Brags in Disguise</div>
-        <div class="pub-authors"><b>Sharath Naganna</b>, Saprativa Bhattacharjee, Biplab Banerjee, Pushpak Bhattacharyya</div>
-        <div class="pub-venue">ACL 2025 (Findings), Vienna, Austria</div>
-        <div class="pub-links">
-          <a class="primary" href="https://aclanthology.org/2025.findings-acl.198/">Paper</a>
-          <a href="https://github.com/SharathHN/HB-24">Code</a>
+        <div class="pub-authors"><span class="me">Sharath Naganna</span>, Saprativa Bhattacharjee, Biplab Banerjee, Pushpak Bhattacharyya</div>
+        <div class="pub-meta">
+          <span class="venue">ACL 2025 Findings</span>
+          <a href="https://aclanthology.org/2025.findings-acl.198/" target="_blank" rel="noopener">Paper</a>
+          <a href="https://github.com/SharathHN/HB-24" target="_blank" rel="noopener">Code</a>
         </div>
-      </div>
-    </div>
-     <div class="pub-card">
-
-      <div>
+      </li>
+      <li>
         <div class="pub-title">Impact of Different Embeddings on Text Classification</div>
-        <div class="pub-authors">K. M. Anil Kumar, S G Anusha, <b>H N Sharath</b>, M Milind, Manju Charan</div>
-        <div class="pub-venue">ICRASET 2024, Mandya, India</div>
-        <div class="pub-links">
-          <a class="primary" href="https://ieeexplore.ieee.org/document/10895636">Paper</a>
-          <a href="https://github.com/SharathHN/fyp-notebooks">Code</a>
+        <div class="pub-authors">K. M. Anil Kumar, S G Anusha, <span class="me">H N Sharath</span>, M Milind, Manju Charan</div>
+        <div class="pub-meta">
+          <span class="venue">ICRASET 2024</span>
+          <a href="https://ieeexplore.ieee.org/document/10895636" target="_blank" rel="noopener">Paper</a>
+          <a href="https://github.com/SharathHN/fyp-notebooks" target="_blank" rel="noopener">Code</a>
         </div>
-      </div>
-    </div>
+      </li>
+    </ol>
   </section>
 
-<!--
-  <section id="projects">
-  <h2>Projects</h2>
-
-  <div class="project">
-    <div class="project-title">Humblebrag Detection (HB-24)</div>
-    <div class="project-meta">NLP · Dataset · 2025</div>
-    <p class="project-desc">
-      Introduced the first NLP benchmark for humblebrag detection, along with a
-      4-tuple formulation and dataset of 3,340 instances.
-    </p>
-    <div class="project-links">
-      <a href="#">Paper</a>
-      <a href="#">Code</a>
-      <a href="#">Dataset</a>
-    </div>
-  </div>
-
-</section>
--->
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: sharathhn@cse.iitb.ac.in</p>
-    <p>Mumbai, India</p>
+  <section id="experience">
+    <h2>Experience</h2>
+    <ul class="exp">
+      <li>
+        <span class="org">IIT Bombay</span>
+        <time>2024 – present</time>
+        <span class="what">MS (Research), CSE · advised by Prof. Pushpak Bhattacharyya</span>
+      </li>
+      <li>
+        <span class="org">Hyperbots Inc.</span>
+        <time>2025</time>
+        <span class="what">Applied ML Intern</span>
+      </li>
+      <li>
+        <span class="org">Cisco</span>
+        <time>2022 – 2024</time>
+        <span class="what">Software Engineer · backend systems in Go</span>
+      </li>
+    </ul>
   </section>
 
   <footer>
-    Last updated — 2026
+    <span>sharathhn@cse.iitb.ac.in · Mumbai, India</span>
+    <span>Updated Oct 2026</span>
   </footer>
 
 </main>
 
 <script>
-  const toggle = document.getElementById("theme-toggle");
-  const root = document.documentElement;
-  const saved = localStorage.getItem("theme");
-
-  if (saved) root.setAttribute("data-theme", saved);
-
-  toggle.onclick = () => {
-    const theme = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-    toggle.textContent = theme === "dark" ? "light mode" : "dark mode";
-  };
+  document.getElementById("theme-btn").addEventListener("click", () => {
+    const root = document.documentElement;
+    const current = root.getAttribute("data-theme") ||
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const next = current === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+  });
 </script>
 
 </body>
 </html>
-
